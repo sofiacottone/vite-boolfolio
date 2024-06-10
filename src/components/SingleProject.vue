@@ -12,6 +12,16 @@ export default {
                 return text.substr(0, 99) + '[...]';
             }
             return text;
+        },
+        changeTechBadgeColor(technologyName) {
+            return {
+                'text-bg-primary': technologyName == 'css',
+                'text-bg-warning': technologyName == 'js',
+                'text-bg-success': technologyName == 'vue',
+                'text-bg-secondary': technologyName == 'sql',
+                'text-bg-dark': technologyName == 'php',
+                'text-bg-danger': technologyName == 'laravel',
+            }
         }
     }
 }
@@ -31,7 +41,8 @@ export default {
                 <template v-if="projectDetails.technologies.length > 0">
                     <div class="fw-bold mb-1">Technologies:</div>
                     <div class="d-flex flex-wrap gap-1">
-                        <div v-for="technology in projectDetails.technologies" class="badge text-bg-secondary">
+                        <div v-for="technology in projectDetails.technologies" class="badge"
+                            :class="changeTechBadgeColor(technology.name)">
                             {{ technology.name }}
                         </div>
 
