@@ -1,6 +1,4 @@
 <script>
-import axios from 'axios';
-
 export default {
     name: 'SingleProject',
     props: {
@@ -29,29 +27,26 @@ export default {
 
 <template>
 
-    <div class="col my-3">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title fw-bold">{{ projectDetails.name }}</h5>
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title fw-bold">{{ projectDetails.name }}</h5>
 
-                <div><span class="fw-bold">Client: </span>{{ projectDetails.client_name }}</div>
+            <div><span class="fw-bold">Client: </span>{{ projectDetails.client_name }}</div>
 
-                <div v-if="projectDetails.type"><span class="fw-bold">Type: </span>{{ projectDetails.type.name }}</div>
+            <div v-if="projectDetails.type"><span class="fw-bold">Type: </span>{{ projectDetails.type.name }}</div>
 
-                <template v-if="projectDetails.technologies.length > 0">
-                    <div class="fw-bold mb-1">Technologies:</div>
-                    <div class="d-flex flex-wrap gap-1">
-                        <div v-for="technology in projectDetails.technologies" class="badge"
-                            :class="changeTechBadgeColor(technology.name)">
-                            {{ technology.name }}
-                        </div>
-
+            <template v-if="projectDetails.technologies.length > 0">
+                <div class="fw-bold mb-1">Technologies:</div>
+                <div class="d-flex flex-wrap gap-1">
+                    <div v-for="technology in projectDetails.technologies" class="badge"
+                        :class="changeTechBadgeColor(technology.name)">
+                        {{ technology.name }}
                     </div>
-                </template>
 
-                <p class="mt-2">{{ truncate(projectDetails.summary) }}</p>
+                </div>
+            </template>
 
-            </div>
+            <p class="mt-2">{{ truncate(projectDetails.summary) }}</p>
         </div>
     </div>
 
