@@ -47,6 +47,9 @@ export default {
             </template>
 
             <p class="mt-2">{{ truncate(projectDetails.summary) }}</p>
+
+            <router-link :to="{ name: 'single-project', params: { slug: projectDetails.slug } }"
+                class="btn btn-outline-secondary">More</router-link>
         </div>
     </div>
 
