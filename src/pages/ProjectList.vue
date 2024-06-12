@@ -1,5 +1,6 @@
 <script>
 import axios from 'axios';
+import { store } from '../store.js';
 import SingleProject from '../components/SingleProject.vue';
 
 export default {
@@ -9,6 +10,7 @@ export default {
     },
     data() {
         return {
+            store,
             projects: [],
             currentPage: 1,
             prevPageUrl: null,
@@ -18,17 +20,21 @@ export default {
     },
     methods: {
         getProjects(pageNumber) {
-            axios.get('http://127.0.0.1:8000/api/projects', {
+            axios.get(`${this.store.baseApiUrl}/api/projects`, {
                 params: {
                     page: pageNumber
                 }
             })
                 .then((response) => {
-                    this.projects = response.data.results.data;
-                    this.currentPage = response.data.results.current_page;
-                    this.prevPageUrl = response.data.results.prev_page_url;
-                    this.nextPageUrl = response.data.results.next_page_url;
-                    this.lastPage = response.data.results.last_page;
+                    if (response.data.success) {
+                        this.projects = response.data.results.data;
+                        this.currentPage = response.data.results.current_page;
+                        this.prevPageUrl = response.data.results.prev_page_url;
+                        this.nextPageUrl = response.data.results.next_page_url;
+                        this.lastPage = response.data.results.last_page;
+                    } else {
+                        this.$router.push({ name: 'not-found' });
+                    }
                 });
         }
     },
