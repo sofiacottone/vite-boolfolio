@@ -22,7 +22,7 @@
 <style lang="scss">
 .ms-lost-bg {
     height: calc(100vh - 57px);
-    background-image: url('src/assets/img/lost-in-space.jpeg');
+    background-image: url('/src/assets/img/lost-in-space.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     font-family: "Roboto Mono", monospace;
