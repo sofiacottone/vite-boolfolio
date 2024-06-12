@@ -1,21 +1,28 @@
 <script>
 import axios from 'axios';
 import { store } from '../store.js';
+import Loader from '../components/Loader.vue';
 
 export default {
     name: 'ProjectDetails',
+    components: {
+        Loader
+    },
     data() {
         return {
             store,
-            project: null
+            project: null,
+            isLoading: false
         }
     },
     methods: {
         getProjectDetails() {
+            this.isLoading = true;
             axios.get(`${this.store.baseApiUrl}/api/projects/${this.$route.params.slug}`)
                 .then((response) => {
                     if (response.data.success) {
                         this.project = response.data.results;
+                        this.isLoading = false;
                     } else {
                         this.$router.push({ name: 'not-found' });
                     }
@@ -40,7 +47,7 @@ export default {
 
 <template>
     <div class="container my-3">
-        <div class="row">
+        <div v-if="!isLoading" class="row">
             <template v-if="project">
                 <div class="card h-100">
                     <div class="card-body">
@@ -72,5 +79,8 @@ export default {
                 </div>
             </template>
         </div>
+        <template v-else>
+            <Loader></Loader>
+        </template>
     </div>
 </template>
