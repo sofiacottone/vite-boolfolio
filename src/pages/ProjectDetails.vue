@@ -1,18 +1,24 @@
 <script>
 import axios from 'axios';
+import { store } from '../store.js';
 
 export default {
     name: 'ProjectDetails',
     data() {
         return {
+            store,
             project: null
         }
     },
     methods: {
         getProjectDetails() {
-            axios.get(`http://127.0.0.1:8000/api/projects/${this.$route.params.slug}`)
+            axios.get(`${this.store.baseApiUrl}/api/projects/${this.$route.params.slug}`)
                 .then((response) => {
-                    this.project = response.data.results;
+                    if (response.data.success) {
+                        this.project = response.data.results;
+                    } else {
+                        this.$router.push({ name: 'not-found' });
+                    }
                 });
         },
         changeTechBadgeColor(technologyName) {
@@ -59,7 +65,7 @@ export default {
                         <p class="mt-2">{{ project.summary }}</p>
 
                         <div v-if="project.cover_image" class="w-75 m-auto">
-                            <img :src="`http://127.0.0.1:8000/storage/${project.cover_image}`"
+                            <img :src="`${this.store.baseApiUrl}/storage/${project.cover_image}`"
                                 class="card-img-bottom img-fluid" :alt="project.name">
                         </div>
                     </div>
