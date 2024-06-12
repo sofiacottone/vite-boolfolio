@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div class="lost-bg vstack justify-content-center align-items-center text-white">
+    <div class="ms-lost-bg vstack justify-content-center align-items-center text-white">
         <div class="text-center z-3">
             <h1 class="fw-bold">Ops! Looks like you're lost!</h1>
             <div class="text-uppercase">page not found.</div>
@@ -14,13 +14,13 @@
                     class="text-uppercase text-white text-decoration-none border rounded-5 p-2">Go
                     home</router-link>
             </div>
-            <img class="" id="yarn-ball" src="/src/assets/img/yarn-ball-block.png" alt="yarn-ball">
+            <img id="yarn-ball" src="/src/assets/img/yarn-ball-block.png" alt="yarn-ball">
         </div>
     </div>
 </template>
 
 <style lang="scss">
-.lost-bg {
+.ms-lost-bg {
     height: calc(100vh - 57px);
     background-image: url('src/assets/img/lost-in-space.jpeg');
     background-repeat: no-repeat;
